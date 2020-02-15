@@ -1,10 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ChemicalBehaviour : MonoBehaviour
 {
-  public IChemical Chemical;
+  public IChemical Chemical
+  {
+    get => _chemical;
+    set
+    {
+      _chemical = value;
+      GetComponent<SpriteRenderer>().sprite = SpriteResolver.ResolveChemical(Chemical.Name);
+    }
+  }
+  private IChemical _chemical;
 
   private readonly List<ChemicalBehaviour> _touchedChemicals = new List<ChemicalBehaviour>();
 
