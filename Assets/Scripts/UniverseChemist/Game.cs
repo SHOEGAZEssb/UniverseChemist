@@ -59,7 +59,7 @@ public class Game
             throw new ArgumentNullException(nameof(elements));
         else
         {
-            var newElements = elements.First().CombineWith(elements.TakeLast(elements.Count() - 1));
+            var newElements = elements.First().CombineWith(elements.Skip(elements.Count() - 1));
             if (newElements.Count() != 0)
             {
                 // remove old elements
