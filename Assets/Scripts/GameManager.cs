@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
 {
   private Game _game;
 
+  public void Combine(IEnumerable<IChemical> chemicals)
+  {
+    _game.Combine(chemicals);
+  }
+
   // Start is called before the first frame update
   void Start()
   {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChemicalBehaviour : MonoBehaviour
@@ -14,25 +15,25 @@ public class ChemicalBehaviour : MonoBehaviour
   }
   private IChemical _chemical;
 
-  private readonly List<ChemicalBehaviour> _touchedChemicals = new List<ChemicalBehaviour>();
+  private GameManager _gameManager;
+  private Collider2D _collider;
 
-  void OnTriggerEnter2D(Collider2D collider)
+  private void Start()
   {
-    var chemical = collider.gameObject.GetComponent<ChemicalBehaviour>();
-    if (chemical != null)
-      _touchedChemicals.Add(chemical);
-  }
-
-  void OnTriggerExit2D(Collider2D collider)
-  {
-    var chemical = collider.gameObject.GetComponent<ChemicalBehaviour>();
-    if (chemical != null)
-      _touchedChemicals.Remove(chemical);
+    _gameManager = FindObjectOfType<GameManager>();
+    _collider = GetComponent<Collider2D>();
   }
 
   void OnMouseUp()
   {
-
+    var chemicals = FindObjectsOfType<ChemicalBehaviour>();
+    foreach(var chemical in chemicals)
+    {
+      if (chemical != this && chemical.GetComponent<Collider2D>().bounds.Intersects(_collider.bounds))
+      {
+        _gameManager.Combine(new[] { Chemical, chemical.Chemical });
+        return;
+      }
+    }
   }
-
 }

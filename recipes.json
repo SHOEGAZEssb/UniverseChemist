@@ -1,0 +1,20 @@
+[
+  {
+    "InputElements": [
+      "Water",
+      "Fire"
+    ],
+    "OutputElements": [
+      "Ash"
+    ]
+  },
+  {
+    "InputElements": [
+      "Fire",
+      "Fire"
+    ],
+    "OutputElements": [
+      "Oxygen"
+    ]
+  }
+]

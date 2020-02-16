@@ -76,7 +76,7 @@ public class Game
         foreach (var element in newElements)
           AddElement(element);
 
-        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(elements, newElements));
+        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(newElements, elements));
       }
     }
   }
@@ -104,7 +104,7 @@ public class Game
         foreach (var e in newElements)
           AddElement(e);
 
-        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(new[] { element }, newElements));
+        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(newElements, new[] { element }));
       }
     }
   }
