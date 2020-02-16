@@ -1,11 +1,8 @@
 using UnityEditor;
-using UnityEngine;
-using System.IO;
-using System;
 
 namespace GitHub.Unity
 {
-    [InitializeOnLoad]
+  [InitializeOnLoad]
     public class UnityAPIWrapper : ScriptableSingleton<UnityAPIWrapper>
     {
         static UnityAPIWrapper()

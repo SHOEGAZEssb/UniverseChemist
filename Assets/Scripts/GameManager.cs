@@ -1,11 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Management object for a <see cref="Game"/>.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
+  #region Member
+
+  /// <summary>
+  /// The current game.
+  /// </summary>
   private Game _game;
+
+  #endregion Member
 
   public void Combine(IEnumerable<IChemical> chemicals)
   {
@@ -17,7 +26,7 @@ public class GameManager : MonoBehaviour
   {
     _game = Game.New();
     _game.ActiveChemicalsChanged += Game_ActiveChemicalsChanged;
-    InstantiateChemicals(_game.ActiveElements);
+    InstantiateChemicals(_game.ActiveChemicals);
   }
 
   private void Game_ActiveChemicalsChanged(object sender, ActiveChemicalsChangedEventArgs e)
@@ -39,11 +48,5 @@ public class GameManager : MonoBehaviour
       var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Chemical"));
       obj.GetComponent<ChemicalBehaviour>().Chemical = newChemical;
     }
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-
   }
 }

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour for representing an active <see cref="IChemical"/>.
+/// </summary>
 public class ChemicalBehaviour : MonoBehaviour
 {
+  #region Properties
+
+  /// <summary>
+  /// The chemical that this behaviour represents.
+  /// </summary>
   public IChemical Chemical
   {
     get => _chemical;
@@ -15,8 +21,14 @@ public class ChemicalBehaviour : MonoBehaviour
   }
   private IChemical _chemical;
 
+  #endregion Properties
+
+  #region Member
+
   private GameManager _gameManager;
   private Collider2D _collider;
+
+  #endregion Member
 
   private void Start()
   {
@@ -24,6 +36,10 @@ public class ChemicalBehaviour : MonoBehaviour
     _collider = GetComponent<Collider2D>();
   }
 
+  /// <summary>
+  /// Combines this chemical with the nearest
+  /// touching chemical.
+  /// </summary>
   void OnMouseUp()
   {
     var chemicals = FindObjectsOfType<ChemicalBehaviour>();
