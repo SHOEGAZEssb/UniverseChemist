@@ -1,19 +1,19 @@
 [
   {
-    "InputElements": [
+    "InputChemicals": [
       "Water",
       "Fire"
     ],
-    "OutputElements": [
+    "OutputChemicals": [
       "Ash"
     ]
   },
   {
-    "InputElements": [
+    "InputChemicals": [
       "Fire",
       "Fire"
     ],
-    "OutputElements": [
+    "OutputChemicals": [
       "Oxygen"
     ]
   }

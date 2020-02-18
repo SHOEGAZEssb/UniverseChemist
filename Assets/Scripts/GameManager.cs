@@ -7,12 +7,20 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+  #region Properties
+
+  public IEnumerable<string> UnlockedElements => _game.UnlockedChemicals;
+
+  #endregion Properties
+
   #region Member
 
   /// <summary>
   /// The current game.
   /// </summary>
   private Game _game;
+
+  private ChemicalEntryListFill _entryFill;
 
   #endregion Member
 
@@ -26,6 +34,10 @@ public class GameManager : MonoBehaviour
   {
     _game = Game.New();
     _game.ActiveChemicalsChanged += Game_ActiveChemicalsChanged;
+
+    _entryFill = FindObjectOfType<ChemicalEntryListFill>();
+    _entryFill.UpdateEntries(_game.UnlockedChemicals);
+
     InstantiateChemicals(_game.ActiveChemicals);
   }
 
