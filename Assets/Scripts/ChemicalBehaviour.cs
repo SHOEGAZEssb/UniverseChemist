@@ -40,7 +40,7 @@ public class ChemicalBehaviour : MonoBehaviour
   /// Combines this chemical with the nearest
   /// touching chemical.
   /// </summary>
-  void OnMouseUp()
+  public void OnMouseUp()
   {
     // check if chemical was dropped onto garbage
     var garbages = FindObjectsOfType<ChemicalGarbage>();

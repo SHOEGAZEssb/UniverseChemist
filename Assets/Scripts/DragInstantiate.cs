@@ -36,6 +36,7 @@ public class DragInstantiate : MonoBehaviour
   public void OnMouseUp()
   {
     _dragging = false;
+    _instantiatedObject.GetComponent<ChemicalBehaviour>().OnMouseUp();
     _instantiatedObject = null;
   }
 
