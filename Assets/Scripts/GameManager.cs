@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     _entryFill = FindObjectOfType<ChemicalEntryListFill>();
     _entryFill.UpdateEntries(_game.UnlockedChemicals);
 
-    InstantiateChemicals(_game.ActiveChemicals);
+    InstantiateChemicals(_game.ActiveChemicals, Vector3.zero);
   }
 
   private void Game_ActiveChemicalsChanged(object sender, ActiveChemicalsChangedEventArgs e)
@@ -46,18 +46,24 @@ public class GameManager : MonoBehaviour
     var active = FindObjectsOfType<ChemicalBehaviour>();
 
     // destroy old chemicals
+    Vector3? firstRemovedPosition = null;
     foreach (var removedChemical in e.RemovedChemicals)
-      Destroy(active.First(c => c.Chemical == removedChemical).gameObject);
+    {
+      var toDestroy = active.First(c => c.Chemical == removedChemical).gameObject;
+      if(!firstRemovedPosition.HasValue)
+        firstRemovedPosition = toDestroy.transform.position;
+      Destroy(toDestroy);
+    }
 
     // create new chemicals
-    InstantiateChemicals(e.NewChemicals);
+    InstantiateChemicals(e.NewChemicals, firstRemovedPosition ?? Vector3.zero);
   }
 
-  private void InstantiateChemicals(IEnumerable<IChemical> chemicals)
+  private void InstantiateChemicals(IEnumerable<IChemical> chemicals, Vector3 position)
   {
     foreach (var newChemical in chemicals)
     {
-      var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Chemical"));
+      var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Chemical"), position, Quaternion.identity);
       obj.GetComponent<ChemicalBehaviour>().Chemical = newChemical;
     }
   }
