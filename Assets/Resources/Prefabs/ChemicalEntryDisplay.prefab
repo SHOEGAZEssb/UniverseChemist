@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 72452799143700470}
   - component: {fileID: 72452799143700471}
   - component: {fileID: 4066956654205656815}
+  - component: {fileID: 8757057862782894352}
+  - component: {fileID: -7519780910053243822}
   m_Layer: 5
   m_Name: ChemicalEntryDisplay
   m_TagString: Untagged
@@ -184,6 +186,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameText: {fileID: 72452799286528031}
   Sprite: {fileID: 72452798646823100}
+--- !u!114 &8757057862782894352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72452799143700469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53afff7eb9efbf548a38a116efcfcd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChemicalPrefab: {fileID: 2452112841330099592, guid: 35cff0eabf96f274e9f849db3ecfb46f,
+    type: 3}
+  EntryDisplay: {fileID: 4066956654205656815}
+--- !u!114 &-7519780910053243822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72452799143700469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8757057862782894352}
+          m_MethodName: OnMouseDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8757057862782894352}
+          m_MethodName: OnMouseUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &72452799286528029
 GameObject:
   m_ObjectHideFlags: 0

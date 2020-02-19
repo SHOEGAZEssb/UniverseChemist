@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
 
   #endregion Member
 
-  public void Combine(IEnumerable<IChemical> chemicals)
-  {
-    _game.Combine(chemicals);
-  }
-
   // Start is called before the first frame update
   void Start()
   {
@@ -39,6 +34,17 @@ public class GameManager : MonoBehaviour
     _entryFill.UpdateEntries(_game.UnlockedChemicals);
 
     InstantiateChemicals(_game.ActiveChemicals, Vector3.zero);
+  }
+
+  public void Combine(IEnumerable<IChemical> chemicals)
+  {
+    _game.Combine(chemicals);
+  }
+
+  public IChemical AddChemicalToWorkspace(string name)
+  {
+    _game.AddChemicalToWorkspace(name);
+    return _game.ActiveChemicals.Last();
   }
 
   private void Game_ActiveChemicalsChanged(object sender, ActiveChemicalsChangedEventArgs e)

@@ -42,6 +42,17 @@ public class ChemicalBehaviour : MonoBehaviour
   /// </summary>
   void OnMouseUp()
   {
+    // check if chemical was dropped onto garbage
+    var garbages = FindObjectsOfType<ChemicalGarbage>();
+    foreach(var garbage in garbages)
+    {
+      if (_collider.bounds.Intersects(garbage.Collider.bounds))
+      {
+        Destroy(gameObject);
+        return;
+      }
+    }
+
     var chemicals = FindObjectsOfType<ChemicalBehaviour>();
     foreach(var chemical in chemicals)
     {
