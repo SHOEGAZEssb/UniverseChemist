@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Behaviour for representing an active <see cref="IChemical"/>.
@@ -27,6 +28,7 @@ public class ChemicalBehaviour : MonoBehaviour
 
   private GameManager _gameManager;
   private Collider2D _collider;
+  private float _doubleClickStart = 0;
 
   #endregion Member
 
@@ -42,9 +44,18 @@ public class ChemicalBehaviour : MonoBehaviour
   /// </summary>
   public void OnMouseUp()
   {
+    // check for double click
+    if ((Time.time - _doubleClickStart) < 0.15f)
+    {
+      OnDoubleClick();
+      _doubleClickStart = -1;
+    }
+    else
+      _doubleClickStart = Time.time;
+
     // check if chemical was dropped onto garbage
     var garbages = FindObjectsOfType<ChemicalGarbage>();
-    foreach(var garbage in garbages)
+    foreach (var garbage in garbages)
     {
       if (_collider.bounds.Intersects(garbage.Collider.bounds))
       {
@@ -54,7 +65,7 @@ public class ChemicalBehaviour : MonoBehaviour
     }
 
     var chemicals = FindObjectsOfType<ChemicalBehaviour>();
-    foreach(var chemical in chemicals)
+    foreach (var chemical in chemicals)
     {
       if (chemical != this && chemical.GetComponent<Collider2D>().bounds.Intersects(_collider.bounds))
       {
@@ -62,5 +73,10 @@ public class ChemicalBehaviour : MonoBehaviour
         return;
       }
     }
+  }
+
+  private void OnDoubleClick()
+  {
+    Debug.Log("Double click");
   }
 }

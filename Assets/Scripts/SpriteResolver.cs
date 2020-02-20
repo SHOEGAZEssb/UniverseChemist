@@ -3,18 +3,16 @@ using UnityEngine;
 
 static class SpriteResolver
 {
-  private static IDictionary<string, string> _chemicalSprites;
-
-  static SpriteResolver()
-  {
-    _chemicalSprites = new Dictionary<string, string>();
-  }
-
   public static Sprite ResolveChemical(string name)
   {
-    if (_chemicalSprites.ContainsKey(name))
-      return Resources.Load<Sprite>($"Sprites/Chemicals/{name}");
-    else
+    try
+    {
+      var sprite = Resources.Load<Sprite>($"Sprites/Chemicals/{name}");
+      return sprite == null ? Resources.Load<Sprite>($"Sprites/Chemicals/Placeholder2") : sprite;
+    }
+    catch
+    {
       return Resources.Load<Sprite>($"Sprites/Chemicals/Placeholder2");
+    }
   }
 }
