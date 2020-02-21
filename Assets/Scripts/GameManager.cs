@@ -69,6 +69,16 @@ public class GameManager : MonoBehaviour
     InstantiateChemicals(new[] { newChemical }, chemical.transform.position + (Vector3)new Vector2(.1f, .1f));
   }
 
+  public void SaveGame()
+  {
+    _game.Save("game.xml");
+  }
+
+  public void LoadGame()
+  {
+    var newGame = Game.FromSaveFile("game.xml");
+  }
+
   private void InstantiateChemicals(IEnumerable<IChemical> chemicals, Vector3 position)
   {
     foreach (var newChemical in chemicals)
