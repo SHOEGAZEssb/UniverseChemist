@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
   void Start()
   {
     _game = Game.New();
-    _game.ActiveChemicalsChanged += Game_ActiveChemicalsChanged;
 
     _entryFill = FindObjectOfType<ChemicalEntryListFill>();
     _entryFill.UpdateEntries(_game.UnlockedChemicals);
@@ -38,31 +37,36 @@ public class GameManager : MonoBehaviour
 
   public void Combine(IEnumerable<IChemical> chemicals)
   {
-    _game.Combine(chemicals);
+    var newChemicals = _game.Combine(chemicals);
+    if(newChemicals.Any())
+    {
+      var active = FindObjectsOfType<ChemicalBehaviour>();
+
+      // destroy old chemicals
+      Vector3? firstRemovedPosition = null;
+      foreach (var removedChemical in chemicals)
+      {
+        var toDestroy = active.First(c => c.Chemical == removedChemical).gameObject;
+        if (!firstRemovedPosition.HasValue)
+          firstRemovedPosition = toDestroy.transform.position;
+        Destroy(toDestroy);
+      }
+
+      // create new chemicals
+      InstantiateChemicals(newChemicals, firstRemovedPosition ?? Vector3.zero);
+    }
   }
 
   public IChemical AddChemicalToWorkspace(string name)
   {
-    _game.AddChemicalToWorkspace(name);
-    return _game.ActiveChemicals.Last();
+    var newChemical = _game.AddChemicalToWorkspace(name);
+    return newChemical;
   }
 
-  private void Game_ActiveChemicalsChanged(object sender, ActiveChemicalsChangedEventArgs e)
+  public void Clone(ChemicalBehaviour chemical)
   {
-    var active = FindObjectsOfType<ChemicalBehaviour>();
-
-    // destroy old chemicals
-    Vector3? firstRemovedPosition = null;
-    foreach (var removedChemical in e.RemovedChemicals)
-    {
-      var toDestroy = active.First(c => c.Chemical == removedChemical).gameObject;
-      if(!firstRemovedPosition.HasValue)
-        firstRemovedPosition = toDestroy.transform.position;
-      Destroy(toDestroy);
-    }
-
-    // create new chemicals
-    InstantiateChemicals(e.NewChemicals, firstRemovedPosition ?? Vector3.zero);
+    var newChemical = AddChemicalToWorkspace(chemical.Chemical.Name);
+    InstantiateChemicals(new[] { newChemical }, chemical.transform.position + (Vector3)new Vector2(.1f, .1f));
   }
 
   private void InstantiateChemicals(IEnumerable<IChemical> chemicals, Vector3 position)

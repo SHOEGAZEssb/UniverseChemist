@@ -45,10 +45,11 @@ public class ChemicalBehaviour : MonoBehaviour
   public void OnMouseUp()
   {
     // check for double click
-    if ((Time.time - _doubleClickStart) < 0.15f)
+    if ((Time.time - _doubleClickStart) < 0.2f)
     {
       OnDoubleClick();
       _doubleClickStart = -1;
+      return;
     }
     else
       _doubleClickStart = Time.time;
@@ -77,6 +78,6 @@ public class ChemicalBehaviour : MonoBehaviour
 
   private void OnDoubleClick()
   {
-    Debug.Log("Double click");
+    _gameManager.Clone(this);
   }
 }

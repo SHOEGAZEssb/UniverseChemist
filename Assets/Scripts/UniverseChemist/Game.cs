@@ -10,15 +10,6 @@ using System.Xml;
 /// </summary>
 public class Game
 {
-  #region Events
-
-  /// <summary>
-  /// Event that is fired when the <see cref="ActiveChemicals"/> change.
-  /// </summary>
-  public event EventHandler<ActiveChemicalsChangedEventArgs> ActiveChemicalsChanged;
-
-  #endregion Events
-
   #region Properties
 
   /// <summary>
@@ -95,7 +86,7 @@ public class Game
   /// Combines the given <paramref name="chemicals"/>.
   /// </summary>
   /// <param name="chemicals">Chemicals to combine.</param>
-  public void Combine(IEnumerable<IChemical> chemicals)
+  public IEnumerable<IChemical> Combine(IEnumerable<IChemical> chemicals)
   {
     if (chemicals == null || chemicals.Any(e => e == null))
       throw new ArgumentNullException(nameof(chemicals));
@@ -111,9 +102,9 @@ public class Game
         // add new elements
         foreach (var element in newElements)
           AddElement(element);
-
-        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(newElements, chemicals));
       }
+
+      return newElements;
     }
   }
 
@@ -122,16 +113,16 @@ public class Game
   /// </summary>
   /// <param name="chemical1">Chemical to combine with <paramref name="chemical2"/>.</param>
   /// <param name="chemical2">Chemical to combine with <paramref name="chemical1"/>.</param>
-  public void Combine(IChemical chemical1, IChemical chemical2)
+  public IEnumerable<IChemical> Combine(IChemical chemical1, IChemical chemical2)
   {
-    Combine(new[] { chemical1, chemical2 });
+    return Combine(new[] { chemical1, chemical2 });
   }
 
   /// <summary>
   /// Disassembles the given <paramref name="chemical"/> into its sub parts.
   /// </summary>
   /// <param name="chemical">Chemical to disassemble.</param>
-  public void Disassemble(IChemical chemical)
+  public IEnumerable<IChemical> Disassemble(IChemical chemical)
   {
     if (chemical == null)
       throw new ArgumentNullException(nameof(chemical));
@@ -148,9 +139,9 @@ public class Game
         // add new elements
         foreach (var e in newElements)
           AddElement(e);
-
-        ActiveChemicalsChanged?.Invoke(this, new ActiveChemicalsChangedEventArgs(newElements, new[] { chemical }));
       }
+
+      return newElements;
     }
   }
 
@@ -159,12 +150,14 @@ public class Game
   /// to the <see cref="ActiveChemicals"/>.
   /// </summary>
   /// <param name="name"></param>
-  public void AddChemicalToWorkspace(string name)
+  public IChemical AddChemicalToWorkspace(string name)
   {
     if (!UnlockedChemicals.Contains(name))
       throw new ArgumentException($"{name} is not unlocked", nameof(name));
 
-    AddElement(new Chemical(name));
+    var chemical = new Chemical(name);
+    AddElement(chemical);
+    return chemical;
   }
 
   /// <summary>
