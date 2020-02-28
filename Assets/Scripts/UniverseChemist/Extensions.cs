@@ -31,6 +31,12 @@ public static class ListExtensions
         return false;
     }
 
+    foreach(var obj in list)
+    {
+      if (!objects.Contains(obj))
+        return false;
+    }
+
     return true;
   }
 }
