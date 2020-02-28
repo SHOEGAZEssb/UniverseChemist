@@ -29,26 +29,11 @@ public class Game
   #region Construction
 
   /// <summary>
-  /// Loads a game from the given <paramref name="file"/>.
-  /// </summary>
-  /// <param name="file">Save file to load.</param>
-  /// <returns>Loaded game.</returns>
-  public static Game FromSaveFile(string file)
-  {
-    var serializer = new DataContractSerializer(typeof(SaveData));
-    using (var fs = new FileStream(file, FileMode.Open))
-    {
-      var gd = (SaveData)serializer.ReadObject(fs);
-      return FromGameData(gd);
-    }
-  }
-
-  /// <summary>
   /// Creates a game from the given <paramref name="data"/>.
   /// </summary>
   /// <param name="data">Data to create game from.</param>
   /// <returns>Created game.</returns>
-  public static Game FromGameData(SaveData data)
+  public static Game FromGameData(GameSaveData data)
   {
     var game = new Game
     {
@@ -166,17 +151,6 @@ public class Game
   public void CleanUp()
   {
     _activeChemicals.RemoveAll(e => true);
-  }
-
-  /// <summary>
-  /// Saves the current game to the given <paramref name="file"/>.
-  /// </summary>
-  /// <param name="file">File to save game to.</param>
-  public void Save(string file)
-  {
-    var serializer = new DataContractSerializer(typeof(SaveData));
-    using (var w = XmlWriter.Create(file, new XmlWriterSettings { Indent = true }))
-      serializer.WriteObject(w, SaveData.FromGame(this));
   }
 
   /// <summary>

@@ -5,16 +5,16 @@ using System.Runtime.Serialization;
 /// Save data to save / load a <see cref="Game"/>.
 /// </summary>
 [DataContract]
-public class SaveData
+public class GameSaveData
 {
   /// <summary>
   /// Creates the save data for the given <paramref name="game"/>.
   /// </summary>
   /// <param name="game">Game to create save data from.</param>
   /// <returns>Created save data.</returns>
-  public static SaveData FromGame(Game game)
+  public static GameSaveData FromGame(Game game)
   {
-    var data = new SaveData();
+    var data = new GameSaveData();
     foreach (var ae in game.ActiveChemicals)
       data.ActiveElements.Add(ae.Name);
     foreach (var ue in game.UnlockedChemicals)

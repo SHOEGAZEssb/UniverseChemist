@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FullSaveData xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Assets.Scripts.SaveLoad">
+  <ActiveChemicalBehaviours>
+    <ChemicalBehaviourData>
+      <ChemicalName>Ash</ChemicalName>
+      <Position xmlns:d4p1="http://schemas.datacontract.org/2004/07/UnityEngine">
+        <d4p1:x>0.107397974</d4p1:x>
+        <d4p1:y>0.2744633</d4p1:y>
+      </Position>
+    </ChemicalBehaviourData>
+    <ChemicalBehaviourData>
+      <ChemicalName>Fire</ChemicalName>
+      <Position xmlns:d4p1="http://schemas.datacontract.org/2004/07/UnityEngine">
+        <d4p1:x>-3.97374725</d4p1:x>
+        <d4p1:y>-1.0143199</d4p1:y>
+      </Position>
+    </ChemicalBehaviourData>
+    <ChemicalBehaviourData>
+      <ChemicalName>Ash</ChemicalName>
+      <Position xmlns:d4p1="http://schemas.datacontract.org/2004/07/UnityEngine">
+        <d4p1:x>-4.76133776</d4p1:x>
+        <d4p1:y>2.6133647</d4p1:y>
+      </Position>
+    </ChemicalBehaviourData>
+    <ChemicalBehaviourData>
+      <ChemicalName>Water</ChemicalName>
+      <Position xmlns:d4p1="http://schemas.datacontract.org/2004/07/UnityEngine">
+        <d4p1:x>-2.49403381</d4p1:x>
+        <d4p1:y>1.65871143</d4p1:y>
+      </Position>
+    </ChemicalBehaviourData>
+  </ActiveChemicalBehaviours>
+  <GameSaveData xmlns:d2p1="http://schemas.datacontract.org/2004/07/">
+    <d2p1:ActiveElements xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <d3p1:string>Water</d3p1:string>
+      <d3p1:string>Ash</d3p1:string>
+      <d3p1:string>Fire</d3p1:string>
+      <d3p1:string>Ash</d3p1:string>
+    </d2p1:ActiveElements>
+    <d2p1:UnlockedElements xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <d3p1:string>Fire</d3p1:string>
+      <d3p1:string>Water</d3p1:string>
+      <d3p1:string>Ash</d3p1:string>
+    </d2p1:UnlockedElements>
+  </GameSaveData>
+</FullSaveData>

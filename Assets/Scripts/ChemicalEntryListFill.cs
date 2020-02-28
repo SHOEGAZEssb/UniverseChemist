@@ -8,8 +8,8 @@ public class ChemicalEntryListFill : MonoBehaviour
   public void UpdateEntries(IEnumerable<string> chemicals)
   {
     // remove old elements
-    for(int i = 0; i < transform.childCount; i++)
-      Destroy(transform.GetChild(i));
+    foreach (var entry in FindObjectsOfType<ChemicalEntryDisplay>())
+      Destroy(entry.gameObject);
 
     foreach (var chemicalName in chemicals)
     {
