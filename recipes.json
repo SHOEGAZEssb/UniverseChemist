@@ -5,7 +5,8 @@
       "Fire"
     ],
     "OutputChemicals": [
-      "Ash"
+      "Ash",
+      "Steam"
     ]
   },
   {
@@ -14,7 +15,7 @@
       "Fire"
     ],
     "OutputChemicals": [
-      "Oxygen"
+      "Smoke"
     ]
   }
 ]
